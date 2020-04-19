@@ -1,4 +1,3 @@
-import './global/styles/global.scss';
+import "./global/styles/global.scss";
 
-import checkboxDemo from './components/Checkbox/Checkbox.demo.js';
-checkboxDemo();
+import checkboxDemo from "./components/Checkbox/Checkbox.demo.js";
