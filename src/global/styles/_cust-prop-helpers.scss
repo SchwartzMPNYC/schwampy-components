@@ -1,0 +1,11 @@
+@use 'sass:string';
+
+@function prop($css-prop) {
+  @return var(#{$css-prop});
+}
+
+@mixin cust-prop($new-prop-name, $value, $unquote: false) {
+  $value: if($unquote, string.unquote($value), $value);
+  $input-to-cust-prop: if(string.index(#{$value}, '--') == 1, prop($value), $value);
+  #{$new-prop-name}: $input-to-cust-prop;
+}
