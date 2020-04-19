@@ -13,7 +13,7 @@ class StyledCheckbox extends HTMLElement {
 	}
 
 	static get observedAttributes() {
-		return ["checked"];
+		return ["checked", "name"];
 	}
 
 	attributeChangedCallback(attr, oldVal, newVal) {
@@ -46,12 +46,38 @@ class StyledCheckbox extends HTMLElement {
 		return this.hasAttribute("checked");
 	}
 
-	set checked(checked) {
-		if (checked) this.setAttribute("checked", checked);
-		else this.removeAttribute("checked");
+	set checked(value) {
+		const testedValue = this.testStringsForLikelyFalsy(value);
 
-		this.input.checked =
-			checked && !/(false|null|undefined|0)/.test(checked);
+		if (testedValue) {
+			this.setAttribute("checked", testedValue);
+			this.input.checked = testedValue;
+		} else {
+			this.removeAttribute("checked");
+			this.input.removeAttribute("checked");
+		}
+	}
+
+	get name() {
+		return this.getAttribute("name");
+	}
+
+	set name(value) {
+		const testedValue = this.testStringsForLikelyFalsy(value);
+
+		if (testedValue) {
+			this.setAttribute("name", testedValue);
+			this.input.setAttribute("name", testedValue);
+		} else {
+			this.removeAttribute("name");
+			this.input.removeAttribute("name");
+		}
+	}
+
+	testStringsForLikelyFalsy(toTest) {
+		return toTest && !/^(false|null|undefined|0)$/.test(toTest)
+			? toTest
+			: "";
 	}
 }
 
