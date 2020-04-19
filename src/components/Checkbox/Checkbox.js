@@ -47,7 +47,6 @@ class StyledCheckbox extends HTMLElement {
 	}
 
 	set checked(checked) {
-		console.log(typeof checked);
 		if (checked) this.setAttribute("checked", checked);
 		else this.removeAttribute("checked");
 

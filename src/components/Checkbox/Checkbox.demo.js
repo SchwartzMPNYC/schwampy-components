@@ -1,4 +1,3 @@
-// export default () => {
 const checkboxStandard = document.createElement("styled-checkbox");
 checkboxStandard.innerText = "Checkbox!?";
 
