@@ -1,4 +1,4 @@
-import innerTemplate from "./Checkbox.template.html";
+import innerTemplate from "./Checkbox.template.js";
 import styles from "./Checkbox.scss";
 
 const templateId = "styled-checkbox-template";
