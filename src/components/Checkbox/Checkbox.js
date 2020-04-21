@@ -1,9 +1,10 @@
 import innerTemplate from "./Checkbox.template.html";
+import styles from "./Checkbox.scss";
 
 const templateId = "styled-checkbox-template";
 const template = document.createElement("template");
 
-template.innerHTML = innerTemplate;
+template.innerHTML = `<style>${styles}</style>\n${innerTemplate}`;
 template.id = templateId;
 
 class StyledCheckbox extends HTMLElement {
