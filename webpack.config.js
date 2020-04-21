@@ -35,21 +35,13 @@ module.exports = {
 		rules: [
 			{
 				test: /\.scss$/i,
-				issuer: [{ test: /\.js$/i }],
-				use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+				issuer: [{ test: /components\/.+\.js$/i }],
+				use: ['to-string-loader' ,"css-loader", "sass-loader"],
 			},
 			{
-				test: /\.scss$/i,
-				issuer: [{ test: /\.template\.html$/i }],
-				use: [
-					{
-						loader: "url-loader",
-						options: {
-							mimetype: "text/css",
-						},
-					},
-					"sass-loader",
-				],
+				test: /global\/.+\.scss$/i,
+				issuer: [{ test: /.js$/i }],
+				use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
 			},
 			{
 				test: /\.html$/i,
