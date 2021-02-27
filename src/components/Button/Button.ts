@@ -1,36 +1,27 @@
-// @ts-expect-error
-import innerTemplate from "./Button.template.html";
+import defineSchwampyComponent from "../../global/decorators/defineSchwampyComponent";
+import SchwampyDefintionConfig from "../../global/interfaces/SchwampyDefintionConfig";
 
+// @ts-expect-error
+import template from "./Button.template.html";
+
+const config: SchwampyDefintionConfig = {
+	tagName: "schwampy-btn",
+	template,
+};
+
+@defineSchwampyComponent(config)
 class Button extends HTMLElement {
-	private static template: HTMLTemplateElement;
 	private button: HTMLButtonElement;
 	private counter = 0;
 
-	constructor() {
-		super();
-		this.attachShadow({ mode: "open" });
-	}
-
 	private connectedCallback() {
-		if (!Button.template) {
-			Button.template = document.createElement('template');
-			Button.template.innerHTML = innerTemplate;
-			document.body.append(Button.template);
-		}
-
-		this.shadowRoot.append(
-			document.importNode(Button.template.content, true)
-		);
-
-		this.button = this.shadowRoot.querySelector('button');
-		this.button.addEventListener('click', this.clicked);
+		this.button = this.shadowRoot.querySelector("button");
+		this.button.addEventListener("click", this.clicked);
 	}
 
 	public clicked = (): void => {
 		console.log(`Clicked ${++this.counter} time(s)`);
-	}
+	};
 }
-
-customElements.define("schwampy-btn", Button);
 
 export default Button;
