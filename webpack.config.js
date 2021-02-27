@@ -1,23 +1,24 @@
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 // this lets me access the dev server from my phone more easily
-const os = require('os');
-const ipAddressOfLocalMachine = Object.values(os.networkInterfaces())[1][0].address;
+const os = require("os");
+const ipAddressOfLocalMachine = Object.values(os.networkInterfaces())[1][0]
+	.address;
 
 module.exports = {
-	mode: 'development',
+	mode: "development",
 	entry: {
-		app: './src/index.js',
-		checkbox: './src/components/Checkbox/Checkbox.js',
+		app: "./src/index.ts",
+		button: "./src/components/Button/Button.ts"
 	},
-	devtool: 'inline-source-map',
+	devtool: "inline-source-map",
 	devServer: {
-		contentBase: './dist',
+		contentBase: "./dist",
 		host: ipAddressOfLocalMachine,
-		port: '2651'
+		port: "2651",
 	},
 	output: {
 		filename: "[name].bundle.js",
@@ -25,17 +26,21 @@ module.exports = {
 	},
 	plugins: [
 		new CleanWebpackPlugin(),
-		new HtmlWebpackPlugin({title: 'Schwampy Components'}),
+		new HtmlWebpackPlugin({ title: "Schwampy Components" }),
 		new MiniCssExtractPlugin({
 			moduleFilename: ({ name }) =>
-				`${name.replace("/js/", "/css/")}.css`,
+				`${name.replace("/ts/", "/css/")}.css`,
 		}),
 	],
+	resolve: {
+		extensions: [".ts", ".js", ".json"],
+	},
 	module: {
 		rules: [
+			{ test: /\.ts$/, use: ["ts-loader"], exclude: /node_modules/ },
 			{
 				test: /\.scss$/i,
-				issuer: [{ test: /\.js$/i }],
+				issuer: [{ test: /\.ts$/i }],
 				use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
 			},
 			{
@@ -57,8 +62,8 @@ module.exports = {
 			},
 			{
 				test: /\.(woff|woff2|eot|ttf|otf)$/,
-				loader: "file-loader"
-			}
+				loader: "file-loader",
+			},
 		],
 	},
 };
