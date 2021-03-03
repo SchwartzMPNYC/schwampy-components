@@ -3,6 +3,7 @@ import SchwampyDefintionConfig from '../interfaces/SchwampyDefintionConfig';
 const defineSchwampyComponent = ({
 	tagName,
 	template,
+	styles
 }: SchwampyDefintionConfig) => (klass) => {
 	const ogConnectedCalback =
 		klass.prototype.connectedCallback || function () {};
@@ -12,7 +13,7 @@ const defineSchwampyComponent = ({
 
 		if (!klass.template) {
 			klass.template = document.createElement("template");
-			klass.template.innerHTML = template;
+			klass.template.innerHTML = `<link rel="stylesheet" href="${styles}">${template}`;
 			document.body.append(klass.template);
 		}
 
