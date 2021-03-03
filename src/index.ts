@@ -1,4 +1,6 @@
 import "./global/styles/global.scss";
 
-// import checkboxDemo from "./components/Checkbox/Checkbox.demo.ts";
-import "./components/Button/Button.demo.ts";
+// @ts-expect-error
+import btnDemo from "./components/Button/Button.demo.html";
+// It feels like there's probably a better way to do this...
+document.write(btnDemo);
