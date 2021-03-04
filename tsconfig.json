@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "outDir": "./built",
+    "allowJs": true,
+    "target": "es2019",
+    "moduleResolution": "node",
+    "experimentalDecorators": true
+  },
+  "include": ["./src/**/*"]
+}

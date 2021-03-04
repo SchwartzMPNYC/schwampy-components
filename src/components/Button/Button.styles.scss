@@ -1,0 +1,8 @@
+button {
+	background-color: var(--color-2);
+	color: var(--color-6);
+}
+
+:host([loud]) button {
+	font-size: 2rem;
+}
