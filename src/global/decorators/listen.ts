@@ -1,6 +1,4 @@
-const convertToIterable = (
-	target: HTMLElement | HTMLElement[] | NodeList
-): HTMLElement[] => {
+const convertToIterable = (target: HTMLElement | HTMLElement[] | NodeList): HTMLElement[] => {
 	switch (target.constructor.name) {
 		case 'NodeList':
 			return Array.from(target as NodeList) as HTMLElement[];
@@ -17,7 +15,7 @@ const listen = (event: string, targetName: string) => (klass, handlerName) => {
 	klass.connectedCallback = function () {
 		// run the original connected callback
 		ogConnectedCallback.call(this);
-		
+
 		// this[targetName] is the actual variable for our class.
 		// We don't know if it'll be a single element or iterable (like a nodelist) when
 		// we decorator is called, so this converts all the options to an iterable.
