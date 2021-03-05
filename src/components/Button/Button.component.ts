@@ -3,9 +3,7 @@ import listen from '../../global/decorators/listen';
 import { attribute, generateAttributeGettersAndSetters, AttributeConfig } from '../../global/decorators/attribute';
 import GetterAndSetter from '../../global/interfaces/GetterAndSetter';
 
-// @ts-expect-error
 import template from './Button.template.html';
-// @ts-expect-error
 import styles from './Button.styles.scss';
 
 const config: SchwampyDefintionConfig = {
