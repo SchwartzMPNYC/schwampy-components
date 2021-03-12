@@ -39,8 +39,9 @@ export default class Button extends HTMLElement {
 		this.counter++;
 	}
 
-	@listen('mouseout', (inst: Button) => inst.button)
-	@listen('focusout', (inst: Button) => inst.button)
+	@listen(['mouseout', 'focusout'], (inst: Button) => inst.button)
+	// @listen('mouseout', (inst: Button) => inst.button)
+	// @listen('focusout', (inst: Button) => inst.button)
 	private reset(): void {
 		this.counter = 0;
 	}
