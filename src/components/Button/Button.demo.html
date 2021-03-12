@@ -3,3 +3,10 @@
 <div>
 	<schwampy-btn counter="4">I am a button with a default counter attribute</schwampy-btn>
 </div>
+
+<script type="text/javascript">
+	document.querySelectorAll('schwampy-btn').forEach(el => {
+		el.addEventListener('clicked', ({detail}) => console.log(detail));
+		el.addEventListener('reset', (event) => console.log('reset counter:', event.target));
+	});
+</script>
