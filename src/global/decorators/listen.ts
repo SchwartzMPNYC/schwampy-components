@@ -1,7 +1,7 @@
 // We don't know if the target will be a single element or iterable (like a nodelist) when
 // the decorator is called, so this converts all the options to an iterable.
 const convertToIterable = (target: HTMLElement | HTMLElement[] | NodeList): HTMLElement[] =>
-	(target.hasOwnProperty('forEach') ? target : [target]) as HTMLElement[];
+	(Symbol.iterator in Object(target) ? target : [target]) as HTMLElement[];
 
 const listen = (event: string, getTarget: (any) => any) => (klass, handlerName, descriptor) => {
 	const ogConnectedCallback = klass.connectedCallback ?? (() => {});
