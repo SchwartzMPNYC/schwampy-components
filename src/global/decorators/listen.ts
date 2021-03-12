@@ -3,7 +3,7 @@
 const convertToIterable = (target: HTMLElement | HTMLElement[] | NodeList): HTMLElement[] =>
 	(target.hasOwnProperty('forEach') ? target : [target]) as HTMLElement[];
 
-const listen = (event: string, targetName: string) => (klass, handlerName) => {
+const listen = (event: string, getTarget: (any) => any) => (klass, handlerName, descriptor) => {
 	const ogConnectedCallback = klass.connectedCallback ?? (() => {});
 	const ogDisonnectedCallback = klass.disconnectedCallback ?? (() => {});
 
@@ -16,15 +16,15 @@ const listen = (event: string, targetName: string) => (klass, handlerName) => {
 		// create the actual handler that we're going to run. This whole dance is
 		// to make sure that our `this` objects are the same, even without an arrow
 		// function.
-		handler = (event: Event) => this[handlerName].call(this, event);
+		handler = (event: Event) => descriptor.value.call(this, event);
 
-		convertToIterable(this[targetName]).forEach(target => target.addEventListener(event, handler));
+		convertToIterable(getTarget(this)).forEach(target => target.addEventListener(event, handler));
 	};
 
 	klass.disconnectedCallback = function () {
 		ogDisonnectedCallback.call(this);
 
-		convertToIterable(this[targetName]).forEach(target => target.removeEventListener(event, handler));
+		convertToIterable(getTarget(this)).forEach(target => target.removeEventListener(event, handler));
 	};
 };
 

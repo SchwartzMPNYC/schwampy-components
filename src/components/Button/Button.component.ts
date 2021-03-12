@@ -34,13 +34,13 @@ export default class Button extends HTMLElement {
 		this.button = this.shadowRoot.querySelector('button');
 	}
 
-	@listen('click', 'button')
+	@listen('click', (inst: Button) => inst.button)
 	private increment(): void {
 		this.counter++;
 	}
 
-	@listen('mouseout', 'button')
-	@listen('focusout', 'button')
+	@listen('mouseout', (inst: Button) => inst.button)
+	@listen('focusout', (inst: Button) => inst.button)
 	private reset(): void {
 		this.counter = 0;
 	}
