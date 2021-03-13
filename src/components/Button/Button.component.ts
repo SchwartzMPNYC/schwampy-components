@@ -46,8 +46,4 @@ export default class Button extends HTMLElement {
 	private reset(): void {
 		this.counter = 0;
 	}
-
-	attributeChangedCallback(name, oldValue, newValue) {
-		console.log(name, oldValue, newValue);
-	}
 }
