@@ -1,0 +1,11 @@
+<div style="display: inline-flex; flex-direction: column; gap: 1rem;">
+	<schwampy-slider min="0" max="255">Red</schwampy-slider>
+	<schwampy-slider min="0" max="255" value="200">Green</schwampy-slider>
+	<schwampy-slider max="255" value="140">Blue</schwampy-slider>
+	<schwampy-slider max="1" value=".8" step="0.01">Alpha</schwampy-slider>
+</div>
+
+
+<script type="text/javascript">
+	document.querySelectorAll('schwampy-slider').forEach(el => el.addEventListener('change', console.log));
+</script>

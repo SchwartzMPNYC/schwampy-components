@@ -1,0 +1,108 @@
+:host {
+	display: inline-grid;
+	grid-template-columns: 3fr 1fr;
+	grid-template-rows: auto auto;
+	grid-template-areas:
+		"label label""slider number""minmaxlabel null";
+	gap: .5rem;
+
+	--fill-color: var(--color-2);
+	--unfill-color: var(--color-5);
+	--fill-percent: 50%;
+
+	--thumb-height: 1.5rem;
+	--thumb-width: var(--thumb-height);
+	--thumb-color: var(--color-3);
+	--thumb-border-radius: 50%;
+	--thumb-active-scale: scale(.8, 1.4);
+}
+
+label {
+	grid-area: label;
+}
+
+[type="range"] {
+	grid-area: slider;
+	-webkit-appearance: none;
+	width: 100%;
+
+
+	background: linear-gradient(to right, var(--unfill-color), var(--unfill-color) var(--fill-percent), var(--fill-color) var(--fill-percent));
+
+	height: 1rem;
+
+
+
+	&::-webkit-slider-thumb {
+		// reset
+		-webkit-appearance: none;
+
+		// styling
+		height: var(--thumb-height);
+		width: var(--thumb-width);
+		background-color: var(--thumb-color);
+
+		transition: transform .1s, border-radius .1s;
+
+		border: 1px solid var(--thumb-color);
+		border-radius: var(--thumb-border-radius);
+
+		cursor: pointer;
+	}
+
+	&::-moz-range-thumb {
+		height: var(--thumb-height);
+		width: var(--thumb-width);
+		background-color: var(--thumb-color);
+
+		transition: transform .1s, border-radius .1s, width .1s;
+
+		border: 1px solid var(--thumb-color);
+		border-radius: var(--thumb-border-radius);
+
+		cursor: pointer;
+	}
+
+	&:focus {
+		outline: none;
+	}
+
+	&:focus-visible {
+		outline: none;
+
+		&::-webkit-slider-thumb {
+			box-shadow: var(--focus-shadow);
+		}
+
+		&::-moz-range-thumb {
+			box-shadow: var(--focus-shadow);
+		}
+	}
+
+	&:active {
+		--thumb-width: .5rem;
+
+		&::-webkit-slider-thumb {
+			transform: var(--thumb-active-scale);
+			border-radius: 2px;
+			// width: .5rem;
+		}
+
+		&::-moz-range-thumb {
+			transform: var(--thumb-active-scale);
+			border-radius: 2px;
+			// width: .5rem;
+		}
+	}
+}
+
+[type="number"] {
+	grid-area: number;
+	width: 6ch;
+}
+
+.min-max-label-wrapper {
+	grid-area: minmaxlabel;
+	display: flex;
+	justify-content: space-between;
+}

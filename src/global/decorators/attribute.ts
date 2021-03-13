@@ -10,7 +10,7 @@ interface AttributeConfig {
 const generateAttributeGettersAndSetters = (
 	attributeName: string,
 	isBoolean: boolean,
-	defaultVal: any
+	defaultVal?: any
 ): GetterAndSetter => {
 	const defaultGetter = function (): any {
 		return this.getAttribute(attributeName) ?? defaultVal;
@@ -32,11 +32,12 @@ const generateAttributeGettersAndSetters = (
 };
 
 const attribute = (config?: AttributeConfig) => {
-	const { alias, defaultVal, isBoolean = false, getterAndSetter } = config;
+	const { alias, defaultVal, isBoolean = false, getterAndSetter } = config ?? {};
 
 	return (klass, propertyName) => {
 		const attributeName = alias || propertyName;
 		const ogObservedAttributes = klass.constructor.observedAttributes ?? [];
+		const ogAttributeChangedCallback = klass.attributeChangedCallback ?? ((name, oldValue, newValue) => {});
 
 		Object.defineProperty(
 			klass,
@@ -51,6 +52,13 @@ const attribute = (config?: AttributeConfig) => {
 			},
 			configurable: true,
 		});
+
+		klass.attributeChangedCallback = function (name, oldValue, newValue) {
+			ogAttributeChangedCallback.call(this, name, oldValue, newValue);
+
+			// Will have to make sure this doesn't suck for performance...
+			if (name === propertyName && oldValue !== newValue) this[propertyName] = newValue;
+		};
 	};
 };
 
