@@ -1,0 +1,8 @@
+<label for="slider" id="label"><slot></slot></label>
+<input id="slider" type="range" />
+<slot name="segments"></slot>
+<input type="number" id="number-input" aria-labelledby="label">
+<span class="min-max-label-wrapper" aria-hidden="true">
+	<span id="min"></span>
+	<span id="max"></span>
+</span>

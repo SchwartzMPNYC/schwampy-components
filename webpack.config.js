@@ -13,6 +13,7 @@ module.exports = {
 	entry: {
 		app: './src/index.ts',
 		button: './src/components/Button/Button.component.ts',
+		slider: './src/components/Slider/Slider.component.ts',
 	},
 	devtool: 'inline-source-map',
 	devServer: {

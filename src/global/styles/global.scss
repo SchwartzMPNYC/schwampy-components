@@ -29,6 +29,7 @@
 	@include cust-prop(--standard-border-width, 0.125em);
 	@include cust-prop(--standard-border, #{prop(--border-color-light)} solid #{prop(--standard-border-width)});
 
+	--focus-shadow: 0 0 0 2px white, 0 0 0 4px black;
 }
 
 body {
